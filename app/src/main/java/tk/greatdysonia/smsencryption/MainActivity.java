@@ -7,6 +7,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.*;
+import android.view.View;
+import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,11 +20,16 @@ private static final int PERMISSIONS_SEND_SMS = 1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_SEND_SMS);
-        }
-        else {
-            //SmsManager.getDefault().sendTextMessage(recipientNumber, null, msg, null,null);
+    }
+
+    public void sendClicked(View v)
+    {
+        EditText number = (EditText) findViewById(R.id.txtRecipient);
+        System.out.println(number.getText());
+        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+        //    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_SEND_SMS);
+        //}
+        //else {
+        //   SmsManager.getDefault().sendTextMessage(recipientNumber, null, msg, null,null);
         }
     }
-}
