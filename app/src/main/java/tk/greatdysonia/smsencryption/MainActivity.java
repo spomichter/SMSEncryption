@@ -12,7 +12,7 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-private static final int PERMISSIONS_SEND_SMS = 1;
+    private static final int PERMISSIONS_SEND_SMS = 1;
     private String recipientNumber = "";
     private String msg = "";
 
@@ -22,14 +22,15 @@ private static final int PERMISSIONS_SEND_SMS = 1;
         setContentView(R.layout.activity_main);
     }
 
-    public void sendClicked(View v)
-    {
+    public void sendClicked(View v) {
         EditText number = (EditText) findViewById(R.id.txtRecipient);
-        System.out.println(number.getText());
-        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-        //    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_SEND_SMS);
-        //}
-        //else {
-        //   SmsManager.getDefault().sendTextMessage(recipientNumber, null, msg, null,null);
+        recipientNumber = number.getText().toString();
+        EditText message = (EditText) findViewById(R.id.txtMessage);
+        msg = message.getText().toString();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, PERMISSIONS_SEND_SMS);
+        } else {
+            SmsManager.getDefault().sendTextMessage(recipientNumber, null, msg, null, null);
         }
     }
+}
